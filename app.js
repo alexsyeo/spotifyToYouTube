@@ -1,3 +1,4 @@
+const spotify_client_id = '15eec43e1d384f5eaf6a811a8d0c3e06'
 const CLIENT_ID = '5276504902-vqgh3qs5ns4hadnjc691go947qbbcqkf.apps.googleusercontent.com'
 const API_KEY = 'AIzaSyDVCNrT1b4C1QlmG598XEop-tHbTyMen9c'
 const loginMessage = document.getElementById('login-message')
@@ -86,7 +87,7 @@ document.getElementById('spotify-login').addEventListener('click', (e) => {
     // const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
     const response_type = 'token'
     const scope = 'playlist-read-private'
-    location.assign(`${spotify_auth_url}?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`)
+    location.assign(`${spotify_auth_url}?client_id=${spotify_client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`)
 })
 
 document.getElementById('convert-button').addEventListener('click', (e) => {
