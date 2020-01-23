@@ -81,7 +81,8 @@ function updateSigninStatus(isSignedIn) {
 // TODO: Change redirect_uri to www.spotifytoyoutube.com
 document.getElementById('spotify-login').addEventListener('click', (e) => {
     const spotify_auth_url = 'https://accounts.spotify.com/authorize'
-    const redirect_uri = 'http://localhost:65346'
+    // const redirect_uri = 'http://localhost:65346'
+    const redirect_uri = 'https://spotifytoyoutube.com'
     // const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
     const response_type = 'token'
     const scope = 'playlist-read-private'
