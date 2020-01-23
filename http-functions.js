@@ -86,7 +86,7 @@ const getYouTubePlaylists = async () => {
     // const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
     if (response.status === 200) {
         // const data = await response.json()
-        return resonse
+        return response
     } else {
         throw new Error('Unable to fetch playlists')
     }
