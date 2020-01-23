@@ -91,16 +91,16 @@ document.getElementById('spotify-login').addEventListener('click', (e) => {
 })
 
 document.getElementById('convert-button').addEventListener('click', (e) => {
-    if (noPlaylistsToProcess()) {
-        alert('No playlists have been selected!')
-        // TODO: Add converting logic
-    } else {
+    // if (noPlaylistsToProcess()) {
+    //     alert('No playlists have been selected!')
+    //     // TODO: Add converting logic
+    // } else {
         createNewPlaylist('testNewPlaylistName').then((data) => {
             console.log(data)
         }).catch((err) => {
             console.log(`Error: ${err}`)
         })
-    }
+    // }
 })
 
 document.getElementById('test-log-playlists-button').addEventListener('click', (e) => {
