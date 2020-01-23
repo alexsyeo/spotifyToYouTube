@@ -59,7 +59,6 @@ async function getYouTubePlaylists() {
 
 // TODO: add description from spotify playlist to youtube playlist
 async function createNewPlaylist(playlist) {
-    debugger
     const response = await gapi.client.youtube.playlists.insert({
         "part": "snippet",
         "resource": {
