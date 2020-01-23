@@ -88,8 +88,8 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
     } else {
         for (let playlistId of Object.keys(playlistsToProcess)) {
             console.log(playlistsToProcess[playlistId])
-            createNewPlaylist(playlistsToProcess[playlistId]).then((playlist) => {
-                const newPlaylistId = playlist.id
+            createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
+                const newPlaylistId = response.result.id
                 getSpotifyPlaylistTracks(newPlaylistId).foreach((playlist_track_obj) => {
                     const track = playlist_track_obj.track
                     getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
