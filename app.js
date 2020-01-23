@@ -98,6 +98,14 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
     }
 })
 
+document.getElementById('test-log-playlists-button').addEventListener('click', (e) => {
+    getYouTubePlaylists().then((response) => {
+        console.log(response)
+    }).catch((err) => {
+        console.log(`Error: ${err}`)
+    })
+})
+
 const access_token = getAccessToken()
 if (!access_token) {
     loginMessage.textContent = 'Please log in to Spotify by pressing button below.'
