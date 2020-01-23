@@ -1,7 +1,7 @@
 const SPOTIFY_LOGIN_URL = 'https://accounts.spotify.com/authorize'
 const SPOTIFY_CLIENT_ID = '15eec43e1d384f5eaf6a811a8d0c3e06'
-// const REDIRECT_URI = 'http://localhost:52804'
-const REDIRECT_URI = 'https://spotifytoyoutube.com'
+const REDIRECT_URI = 'http://localhost:56257'
+// const REDIRECT_URI = 'https://spotifytoyoutube.com'
 // const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
 const RESPONSE_TYPE = 'token'
 const SPOTIFY_SCOPE = 'playlist-read-private'
@@ -59,16 +59,17 @@ async function getYouTubePlaylists() {
 
 // TODO: add description from spotify playlist to youtube playlist
 async function createNewPlaylist(playlist) {
+    debugger
     const response = await gapi.client.youtube.playlists.insert({
-        'part': 'snippet',
-        'resource': {
-            'snippet': {
-                'title': playlist.name,
-                'description': playlist.description
+        "part": "snippet",
+        "resource": {
+            "snippet": {
+                "title": playlist.name,
+                "description": playlist.description
             },
-            // 'status': {
-            //     'privacyStatus': playlist.public ? 'public' : 'private'
-            // }
+            "status": {
+                "privacyStatus": playlist.public ? "public" : "private"
+            }
         }
     })
     if (response.status === 200) {
