@@ -92,18 +92,29 @@ const getYouTubePlaylists = async () => {
     }
 }
 
+
+// TODO: add description from spotify playlist to youtube playlist
 const createNewPlaylist = async (playlistTitle) => {
-    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true', {
-        method: 'POST',
-        body: JSON.stringify({
+    // const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         "snippet": {
+    //             "title": playlistTitle
+    //         }
+    //     })
+    // })
+    const response = await gapi.client.youtube.playlists.insert({
+        "part": "snippet",
+        "resource": {
             "snippet": {
                 "title": playlistTitle
             }
-        })
+        }
     })
     if (response.status === 200) {
-        const data = await response.json()
-        return data
+        // const data = await response.json()
+        // return data
+        return response
     } else {
         throw new Error('Unable to fetch playlists')
     }
