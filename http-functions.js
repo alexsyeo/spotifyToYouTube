@@ -45,6 +45,54 @@ async function getSpotifyPlaylists() {
     }
 }
 
+// Takes in a Spotify playlist's id and returns an array of playlist track objects (or error)
+async function getSpotifyPlaylistTracks(playlist_id) {
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+        headers: {
+            'Authorization': `Bearer ${access_token}`
+        }
+    })
+
+    if (response.status === 200) {
+        const data = await response.json()
+        return data
+    } else {
+        throw new Error('An error has taken place.')
+    }
+}
+
+async function getYouTubeVideo(artist, trackName) {
+    const response = await gapi.client.youtube.search.list({
+        'part': 'snippet',
+        'maxResults': 1,
+        'q': artist + ' ' + trackName,
+        'type': 'video'
+    })
+    if (response.status === 200) {
+        return response.items
+    } else {
+        throw new Error('Unable to fetch YouTube video')
+    }
+}
+
+async function insertVideoIntoPlaylist(playlistId, resourceId) {
+    const response = await gapi.client.youtube.playlistItems.insert({
+        'part': 'snippet',
+        'resource': {
+            'snippet': {
+                'playlistId': playlistId,
+                'resourceId': resourceId
+            }
+        }
+    })
+
+    if (response.status === 200) {
+        return response
+    } else {
+        throw new Error('Unable to insert video into playlist')
+    }
+}
+
 async function getYouTubePlaylists() {
     const response = await gapi.client.youtube.playlists.list({
         "part": "snippet",

@@ -87,8 +87,16 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
         alert('No playlists have been selected!')
     } else {
         for (let playlistId of Object.keys(playlistsToProcess)) {
-            createNewPlaylist(playlistsToProcess[playlistId]).then((data) => {
-                console.log(data)
+            console.log(playlistsToProcess[playlistId])
+            createNewPlaylist(playlistsToProcess[playlistId]).then((playlist) => {
+                const newPlaylistId = playlist.id
+                getSpotifyPlaylistTracks(newPlaylistId).foreach((playlist_track_obj) => {
+                    const track = playlist_track_obj.track
+                    getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
+                        const searchResult = searchResults[0]
+                        insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
+                    })
+                })
             }).catch((err) => {
                 console.log(`Error: ${err}`)
             })

@@ -21,3 +21,5 @@ const renderSpotifyPlaylists = (playlists) => {
         playlistsEl.appendChild(checkBox)
     })
 }
+
+const formatTrackArtists = (artists) => artists.length > 1 ? artists[0] + ' ' + artists[1] : artists[0]
