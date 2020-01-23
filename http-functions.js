@@ -79,7 +79,11 @@ const getUserPlaylists = async () => {
 }
 
 const getYouTubePlaylists = async () => {
-    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
+    const response = await gapi.client.youtube.playlists.list({
+        "part": "snippet",
+        "mine": true
+    })
+    // const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
     if (response.status === 200) {
         const data = await response.json()
         return data
