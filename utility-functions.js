@@ -1,0 +1,1 @@
+const noPlaylistsToProcess = () => !Object.keys(playlistsToProcess).length
