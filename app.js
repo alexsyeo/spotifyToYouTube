@@ -1,4 +1,3 @@
-const spotify_client_id = '15eec43e1d384f5eaf6a811a8d0c3e06'
 const CLIENT_ID = '5276504902-vqgh3qs5ns4hadnjc691go947qbbcqkf.apps.googleusercontent.com'
 const API_KEY = 'AIzaSyDVCNrT1b4C1QlmG598XEop-tHbTyMen9c'
 const loginMessage = document.getElementById('login-message')
@@ -79,28 +78,22 @@ function updateSigninStatus(isSignedIn) {
     setSigninStatus();
 }
 
-// TODO: Change redirect_uri to www.spotifytoyoutube.com
 document.getElementById('spotify-login').addEventListener('click', (e) => {
-    const spotify_auth_url = 'https://accounts.spotify.com/authorize'
-    // const redirect_uri = 'http://localhost:65346'
-    const redirect_uri = 'https://spotifytoyoutube.com'
-    // const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
-    const response_type = 'token'
-    const scope = 'playlist-read-private'
-    location.assign(`${spotify_auth_url}?client_id=${spotify_client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}`)
+    redirectToSpotifyLogin()
 })
 
 document.getElementById('convert-button').addEventListener('click', (e) => {
-    // if (noPlaylistsToProcess()) {
-    //     alert('No playlists have been selected!')
-    //     // TODO: Add converting logic
-    // } else {
-        createNewPlaylist('testNewPlaylistName').then((data) => {
-            console.log(data)
-        }).catch((err) => {
-            console.log(`Error: ${err}`)
-        })
-    // }
+    if (noPlaylistsToProcess()) {
+        alert('No playlists have been selected!')
+    } else {
+        for (let playlistId of Object.keys(playlistsToProcess)) {
+            createNewPlaylist(playlistsToProcess[playlistId]).then((data) => {
+                console.log(data)
+            }).catch((err) => {
+                console.log(`Error: ${err}`)
+            })
+        }
+    }
 })
 
 document.getElementById('test-log-playlists-button').addEventListener('click', (e) => {
@@ -116,9 +109,8 @@ if (!access_token) {
     loginMessage.textContent = 'Please log in to Spotify by pressing button below.'
 } else {
     loginMessage.textContent = 'Currently logged in to Spotify.'
-    // TODO: list playlists on user screen
-    getUserPlaylists().then((playlists) => {
-        console.log(playlists)
+    getSpotifyPlaylists().then((playlists) => {
+        renderSpotifyPlaylists(playlists)
     }).catch((err) => {
         console.log(err)
     })

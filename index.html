@@ -9,17 +9,14 @@
         <button id="spotify-login">Spotify Login</button>
         <button id="convert-button">Convert Playlists</button>
         <button id="test-log-playlists-button">Log Playlists</button>
+        <button id="sign-in-or-out-button" style="margin-left: 25px">Sign In/Authorize</button>
+        <button id="revoke-access-button" style="display: none; margin-left: 25px">Revoke access</button>
         <ul id="playlists"></ul>
         <script src="http-functions.js"></script>
         <script src="app.js"></script>
         <script src="utility-functions.js"></script>
-
-        
-        <button id="sign-in-or-out-button" style="margin-left: 25px">Sign In/Authorize</button>
-        <button id="revoke-access-button" style="display: none; margin-left: 25px">Revoke access</button>
         
         <div id="auth-status" style="display: inline; padding-left: 25px"></div>
-        <!-- <hr> -->
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"

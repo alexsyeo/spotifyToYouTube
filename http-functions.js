@@ -1,5 +1,13 @@
+const SPOTIFY_LOGIN_URL = 'https://accounts.spotify.com/authorize'
+const SPOTIFY_CLIENT_ID = '15eec43e1d384f5eaf6a811a8d0c3e06'
+const REDIRECT_URI = 'http://localhost:52804'
+// const REDIRECT_URI = 'https://spotifytoyoutube.com'
+// const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
+const RESPONSE_TYPE = 'token'
+const SPOTIFY_SCOPE = 'playlist-read-private'
+
 // Checks for access_token in url and returns it. If no access_token, returns null.
-const getAccessToken = () => {
+function getAccessToken() {
     let hash = window.location.hash
     if (!hash) {
         return null
@@ -18,50 +26,9 @@ const getAccessToken = () => {
     return null
 }
 
-// const getUserPlaylists = () => {
-//     const request = new XMLHttpRequest()
-
-//     request.open('GET', 'https://api.spotify.com/v1/me/playlists')
-//     request.setRequestHeader('Accept', 'application/json')
-//     request.setRequestHeader('Content-Type', 'application/json')
-//     request.setRequestHeader('Authorization', `Bearer ${access_token}`)
-
-//     request.send()
-//     request.addEventListener('readystatechange', (e) => {
-//         if (e.target.readyState === 4 && e.target.status === 200) {
-//             const data = JSON.parse(e.target.responseText)
-//             // For each playlist in data.items, display the playlist and include a button next to the item.
-//             // If a playlist is selected, then it will be queried in the YouTube API.
-//             const playlistsEl = document.getElementById('playlists')
-//             data.items.forEach((playlist) => {
-//                 const listEl = document.createElement('li')
-//                 listEl.textContent = playlist.name
-//                 const checkBox = document.createElement('input')
-//                 checkBox.setAttribute('type', 'checkbox')
-//                 checkBox.addEventListener('change', (e) => {
-//                     if (e.target.checked) {
-//                         if (!playlistsToProcess.hasOwnProperty(playlist.name)) {
-//                             playlistsToProcess[playlist.name] = playlist.id
-//                         }
-//                     } else {
-//                         delete playlistsToProcess[playlist.name]
-//                     }
-//                     console.log(playlistsToProcess)
-                    
-//                     console.log(e) 
-//                     console.log(playlist)
-//                 })
-
-//                 playlistsEl.appendChild(listEl)
-//                 playlistsEl.appendChild(checkBox)
-//             })
-//         } else if (e.target.status === 400) {
-//             console.log('An error has taken place')
-//         }
-//     })
-// }
-
-const getUserPlaylists = async () => {
+// TODO: allow for more than 50 playlists by calling this function multiple times and appending the results together
+// Gets up to 50 of the user's playlists and returns as a promise
+async function getSpotifyPlaylists() {
     const response = await fetch('https://api.spotify.com/v1/me/playlists', {
         headers: {
             'Accept': 'application/json',
@@ -72,50 +39,41 @@ const getUserPlaylists = async () => {
 
     if (response.status === 200) {
         const data = await response.json()
-        return (data.items)
+        return data.items
     } else {
         throw new Error('An error has taken place.')
     }
 }
 
-const getYouTubePlaylists = async () => {
+async function getYouTubePlaylists() {
     const response = await gapi.client.youtube.playlists.list({
         "part": "snippet",
         "mine": true
     })
-    // const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
     if (response.status === 200) {
-        // const data = await response.json()
         return response
     } else {
-        throw new Error('Unable to fetch playlists')
+        throw new Error('Unable to fetch YouTube playlists')
     }
 }
 
-
 // TODO: add description from spotify playlist to youtube playlist
-const createNewPlaylist = async (playlistTitle) => {
-    // const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
+async function createNewPlaylist(playlist) {
+    // const response = await gapi.client.youtube.playlists.insert({
+    //     "part": "snippet",
+    //     "resource": {
     //         "snippet": {
     //             "title": playlistTitle
     //         }
-    //     })
+    //     }
     // })
-    const response = await gapi.client.youtube.playlists.insert({
-        "part": "snippet",
-        "resource": {
-            "snippet": {
-                "title": playlistTitle
-            }
-        }
-    })
-    if (response.status === 200) {
-        // const data = await response.json()
-        // return data
-        return response
-    } else {
-        throw new Error('Unable to fetch playlists')
-    }
+    // if (response.status === 200) {
+    //     return response
+    // } else {
+    //     throw new Error('Unable to create new playlist')
+    // }
+}
+
+function redirectToSpotifyLogin() {
+    location.assign(`${SPOTIFY_LOGIN_URL}?client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SPOTIFY_SCOPE}`)
 }
