@@ -66,9 +66,9 @@ async function createNewPlaylist(playlist) {
                 'title': playlist.name,
                 'description': playlist.description
             },
-            'status': {
-                'privacyStatus': playlist.public || 'private'
-            }
+            // 'status': {
+            //     'privacyStatus': playlist.public ? 'public' : 'private'
+            // }
         }
     })
     if (response.status === 200) {
