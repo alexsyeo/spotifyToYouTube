@@ -79,7 +79,7 @@ const getUserPlaylists = async () => {
 }
 
 const getYouTubePlaylists = async () => {
-    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=&mine=true')
+    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
     if (response.status === 200) {
         const data = await response.json()
         return data
@@ -88,3 +88,19 @@ const getYouTubePlaylists = async () => {
     }
 }
 
+const createNewPlaylist = async (playlistTitle) => {
+    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true', {
+        method: 'POST',
+        body: JSON.stringify({
+            "snippet": {
+                "title": playlistTitle
+            }
+        })
+    })
+    if (response.status === 200) {
+        const data = await response.json()
+        return data
+    } else {
+        throw new Error('Unable to fetch playlists')
+    }
+}

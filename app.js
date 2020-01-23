@@ -93,8 +93,13 @@ document.getElementById('spotify-login').addEventListener('click', (e) => {
 document.getElementById('convert-button').addEventListener('click', (e) => {
     if (noPlaylistsToProcess()) {
         alert('No playlists have been selected!')
-    } else {
         // TODO: Add converting logic
+    } else {
+        createNewPlaylist('testNewPlaylistName').then((data) => {
+            console.log(data)
+        }).catch((err) => {
+            console.log(`Error: ${err}`)
+        })
     }
 })
 
