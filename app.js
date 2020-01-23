@@ -87,7 +87,6 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
         alert('No playlists have been selected!')
     } else {
         for (let playlistId of Object.keys(playlistsToProcess)) {
-            console.log(playlistsToProcess[playlistId])
             createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
                 const newPlaylistId = response.result.id
                 getSpotifyPlaylistTracks(newPlaylistId).foreach((playlist_track_obj) => {
