@@ -103,11 +103,11 @@ if (!access_token) {
     loginMessage.textContent = 'Please log in to Spotify by pressing button below.'
 } else {
     loginMessage.textContent = 'Currently logged in to Spotify.'
+    // TODO: list playlists on user screen
+    getUserPlaylists().then((playlists) => {
+        console.log(playlists)
+    }).catch((err) => {
+        console.log(err)
+    })
 }
 
-// TODO: list playlists on user screen
-getUserPlaylists().then((playlists) => {
-    console.log(playlists)
-}).catch((err) => {
-    console.log(err)
-})
