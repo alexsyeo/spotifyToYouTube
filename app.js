@@ -110,4 +110,3 @@ if (!access_token) {
         console.log(err)
     })
 }
-

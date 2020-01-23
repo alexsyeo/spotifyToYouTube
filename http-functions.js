@@ -77,3 +77,17 @@ const getUserPlaylists = async () => {
         throw new Error('An error has taken place.')
     }
 }
+
+const getYouTubePlaylists = async () => {
+    const response = await fetch('https://www.googleapis.com/youtube/v3/playlists?part=&mine=true')
+    return response
+}
+
+document.getElementById('test-log-playlists-button').addEventListener('click', (e) => {
+    getYouTubePlaylists().then((response) => {
+        console.log(response)
+    }).catch((err) => {
+        console.log(`Error: ${err}`)
+    })
+})
+
