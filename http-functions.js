@@ -59,19 +59,23 @@ async function getYouTubePlaylists() {
 
 // TODO: add description from spotify playlist to youtube playlist
 async function createNewPlaylist(playlist) {
-    // const response = await gapi.client.youtube.playlists.insert({
-    //     "part": "snippet",
-    //     "resource": {
-    //         "snippet": {
-    //             "title": playlistTitle
-    //         }
-    //     }
-    // })
-    // if (response.status === 200) {
-    //     return response
-    // } else {
-    //     throw new Error('Unable to create new playlist')
-    // }
+    const response = await gapi.client.youtube.playlists.insert({
+        'part': 'snippet',
+        'resource': {
+            'snippet': {
+                'title': playlist.name,
+                'description': playlist.description
+            },
+            'status': {
+                'privacyStatus': playlist.public ? 'public' : 'private'
+            }
+        }
+    })
+    if (response.status === 200) {
+        return response
+    } else {
+        throw new Error('Unable to create new playlist')
+    }
 }
 
 function redirectToSpotifyLogin() {
