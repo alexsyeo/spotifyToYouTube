@@ -69,7 +69,7 @@ async function getYouTubeVideo(artist, trackName) {
         'type': 'video'
     })
     if (response.status === 200) {
-        return response.items
+        return response.result.items
     } else {
         throw new Error('Unable to fetch YouTube video')
     }
