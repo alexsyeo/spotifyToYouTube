@@ -94,11 +94,11 @@ async function insertVideoIntoPlaylist(playlistId, resourceId) {
 }
 
 async function testFunction(newPlaylistId, playlist_track_objs) {
-    playlist_track_objs.forEach((playlist_track_obj) => {
-        const track = playlist_track_obj.track
+    for (let i = 0; i < playlist_track_objs.length; i++) {
+        const track = playlist_track_objs[i].track
         const searchResult = await getYouTubeVideo(formatTrackArtists(track.artists), track.name)[0]
         await insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
-    })
+    }
 }
 
 async function getYouTubePlaylists() {
