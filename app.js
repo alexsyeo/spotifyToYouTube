@@ -99,16 +99,17 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
                     //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
                     //     })
                     // })
-                    playlist_track_objs.map((playlist_track_obj) => {
-                        const track = playlist_track_obj.track
-                        getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
-                            const searchResult = searchResults[0]
-                            insertVideoIntoPlaylist(newPlaylistId, searchResult.id).then(() => {
-                                console.log("finished inserting video into playlist!")
-                            })
-                        })
-                    })
-                })
+                    return testFunction(newPlaylistId, playlist_track_objs)
+                    // playlist_track_objs.map((playlist_track_obj) => {
+                    //     const track = playlist_track_obj.track
+                    //     getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
+                    //         const searchResult = searchResults[0]
+                    //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id).then(() => {
+                    //             console.log("finished inserting video into playlist!")
+                    //         })
+                    //     })
+                    // })
+                }).then(console.log("we done!"))
             }).catch((err) => {
                 console.log(`Error: ${err}`)
             })
