@@ -92,7 +92,14 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
             createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
                 const newPlaylistId = response.result.id
                 getSpotifyPlaylistTracks(playlistId).then((playlist_track_objs) => {
-                    playlist_track_objs.forEach((playlist_track_obj) => {
+                    // playlist_track_objs.forEach((playlist_track_obj) => {
+                    //     const track = playlist_track_obj.track
+                    //     getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
+                    //         const searchResult = searchResults[0]
+                    //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
+                    //     })
+                    // })
+                    playlist_track_objs.map((playlist_track_obj) => {
                         const track = playlist_track_obj.track
                         getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
                             const searchResult = searchResults[0]
