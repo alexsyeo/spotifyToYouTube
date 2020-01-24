@@ -99,13 +99,15 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
                     //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
                     //     })
                     // })
-                    playlist_track_objs.map((playlist_track_obj) => {
+                    return Promise.all(playlist_track_objs.map((playlist_track_obj) => {
                         const track = playlist_track_obj.track
                         getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
                             const searchResult = searchResults[0]
                             insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
                         })
-                    })
+                    }))
+                }).then(() => {
+                    loginMessage.textContent = 'Finished converting playlists!'
                 })
             }).catch((err) => {
                 console.log(`Error: ${err}`)
