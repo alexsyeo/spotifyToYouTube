@@ -22,4 +22,4 @@ const renderSpotifyPlaylists = (playlists) => {
     })
 }
 
-const formatTrackArtists = (artists) => artists.length > 1 ? artists[0] + ' ' + artists[1] : artists[0]
+const formatTrackArtists = (artists) => artists.length > 1 ? artists[0].name + ' ' + artists[1].name : artists[0].name
