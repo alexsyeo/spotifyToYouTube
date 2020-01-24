@@ -91,7 +91,7 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
         for (let playlistId of Object.keys(playlistsToProcess)) {
             createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
                 const newPlaylistId = response.result.id
-                getSpotifyPlaylistTracks(newPlaylistId).then((playlist_track_objs) => {
+                getSpotifyPlaylistTracks(playlistId).then((playlist_track_objs) => {
                     playlist_track_objs.foreach((playlist_track_obj) => {
                         const track = playlist_track_obj.track
                         getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
