@@ -55,7 +55,7 @@ async function getSpotifyPlaylistTracks(playlist_id) {
 
     if (response.status === 200) {
         const data = await response.json()
-        return data
+        return data.items
     } else {
         throw new Error('An error has taken place.')
     }
