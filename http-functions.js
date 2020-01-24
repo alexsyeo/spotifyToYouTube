@@ -96,7 +96,8 @@ async function insertVideoIntoPlaylist(playlistId, resourceId) {
 async function testFunction(newPlaylistId, playlist_track_objs) {
     for (let i = 0; i < playlist_track_objs.length; i++) {
         const track = playlist_track_objs[i].track
-        const searchResult = await getYouTubeVideo(formatTrackArtists(track.artists), track.name)[0]
+        let searchResult = await getYouTubeVideo(formatTrackArtists(track.artists), track.name)
+        searchResult = searchResult[0]
         await insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
     }
 }
