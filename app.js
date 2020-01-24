@@ -103,7 +103,7 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
                         const track = playlist_track_obj.track
                         getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
                             const searchResult = searchResults[0]
-                            await insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
+                            insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
                         })
                     })
                 })
