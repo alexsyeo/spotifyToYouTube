@@ -1,7 +1,7 @@
 // TODO: Modify below client_id and api_key to originals
 
-const CLIENT_ID = '289356162340-julqdumvbk2eqvag0ac7o3pdcaonol05.apps.googleusercontent.com'
-const API_KEY = 'AIzaSyBY__CqogNDP_9jpliyhxh7_X5xSDmRPRw'
+const CLIENT_ID = '35574274823-j4hbot7cn7f7d02ktqelpm48m342kt1f.apps.googleusercontent.com'
+const API_KEY = 'AIzaSyAuEvIaIquCi0jatYTMpOSiMthU7kH6ixQ'
 const loginMessage = document.getElementById('login-message')
 const playlistsToProcess = {}
 var GoogleAuth;
