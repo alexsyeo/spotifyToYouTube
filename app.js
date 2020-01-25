@@ -90,6 +90,7 @@ convertButton.addEventListener('click', (e) => {
     if (noPlaylistsToProcess()) {
         alert('No playlists have been selected!')
     } else {
+        displayMessage.textContent = 'Processing...'
         for (let playlistId of Object.keys(playlistsToProcess)) {
             createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
                 const newPlaylistId = response.result.id
@@ -99,7 +100,7 @@ convertButton.addEventListener('click', (e) => {
                     displayMessage.textContent = 'Success!'
                 })
             }).catch((err) => {
-                console.log(`Error: ${err}`)
+                alert(`Error: ${err}`)
             })
         }
     }
