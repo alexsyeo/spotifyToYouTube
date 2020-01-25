@@ -1,8 +1,6 @@
 const SPOTIFY_LOGIN_URL = 'https://accounts.spotify.com/authorize'
 const SPOTIFY_CLIENT_ID = '15eec43e1d384f5eaf6a811a8d0c3e06'
-// const REDIRECT_URI = 'http://localhost:56257'
 const REDIRECT_URI = 'https://spotifytoyoutube.com'
-// const redirect_uri = 'https://alexsyeo.github.io/spotifyToYouTube'
 const RESPONSE_TYPE = 'token'
 const SPOTIFY_SCOPE = 'playlist-read-private'
 
@@ -93,7 +91,7 @@ async function insertVideoIntoPlaylist(playlistId, resourceId) {
     }
 }
 
-async function testFunction(newPlaylistId, playlist_track_objs) {
+async function insertVideosIntoPlaylist(newPlaylistId, playlist_track_objs) {
     for (let i = 0; i < playlist_track_objs.length; i++) {
         const track = playlist_track_objs[i].track
         let searchResult = await getYouTubeVideo(formatTrackArtists(track.artists), track.name)
@@ -114,7 +112,6 @@ async function getYouTubePlaylists() {
     }
 }
 
-// TODO: add description from spotify playlist to youtube playlist
 async function createNewPlaylist(playlist) {
     const response = await gapi.client.youtube.playlists.insert({
         "part": "snippet,status",

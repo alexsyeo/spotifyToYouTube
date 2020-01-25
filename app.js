@@ -1,11 +1,13 @@
-// TODO: Modify below client_id and api_key to originals
-
-const CLIENT_ID = '35574274823-j4hbot7cn7f7d02ktqelpm48m342kt1f.apps.googleusercontent.com'
-const API_KEY = 'AIzaSyAuEvIaIquCi0jatYTMpOSiMthU7kH6ixQ'
-const loginMessage = document.getElementById('login-message')
+const CLIENT_ID = '5276504902-vqgh3qs5ns4hadnjc691go947qbbcqkf.apps.googleusercontent.com'
+const API_KEY = 'AIzaSyDVCNrT1b4C1QlmG598XEop-tHbTyMen9c'
+const SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
+const displayMessage = document.getElementById('display-message')
+const convertButton = document.getElementById('convert-button')
+const spotifyLogin = document.getElementById('spotify-login')
 const playlistsToProcess = {}
-var GoogleAuth;
-var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
+let access_token
+let GoogleAuth
+
 function handleClientLoad() {
     // Load the API's client and auth2 modules.
     // Call the initClient function after the modules load.
@@ -15,7 +17,7 @@ function handleClientLoad() {
 function initClient() {
     // Retrieve the discovery document for version 3 of YouTube Data API.
     // In practice, your app can retrieve one or more discovery documents.
-    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
+    const discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
 
     // Initialize the gapi.client object, which app uses to make API requests.
     // Get API key and client ID from API Console.
@@ -32,7 +34,7 @@ function initClient() {
         GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
         // Handle initial sign-in state. (Determine if user is already signed in.)
-        var user = GoogleAuth.currentUser.get();
+        const user = GoogleAuth.currentUser.get();
         setSigninStatus();
 
         // Call handleAuthClick function when user clicks on
@@ -60,9 +62,9 @@ function revokeAccess() {
     GoogleAuth.disconnect();
 }
 
-function setSigninStatus(isSignedIn) {
-    var user = GoogleAuth.currentUser.get();
-    var isAuthorized = user.hasGrantedScopes(SCOPE);
+function setSigninStatus() {
+    const user = GoogleAuth.currentUser.get();
+    const isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
         $('#sign-in-or-out-button').html('Sign out');
         $('#revoke-access-button').css('display', 'inline-block');
@@ -76,15 +78,15 @@ function setSigninStatus(isSignedIn) {
     }
 }
 
-function updateSigninStatus(isSignedIn) {
+function updateSigninStatus() {
     setSigninStatus();
 }
 
-document.getElementById('spotify-login').addEventListener('click', (e) => {
+spotifyLogin.addEventListener('click', (e) => {
     redirectToSpotifyLogin()
 })
 
-document.getElementById('convert-button').addEventListener('click', (e) => {
+convertButton.addEventListener('click', (e) => {
     if (noPlaylistsToProcess()) {
         alert('No playlists have been selected!')
     } else {
@@ -92,24 +94,10 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
             createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
                 const newPlaylistId = response.result.id
                 getSpotifyPlaylistTracks(playlistId).then((playlist_track_objs) => {
-                    // playlist_track_objs.forEach((playlist_track_obj) => {
-                    //     const track = playlist_track_obj.track
-                    //     getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
-                    //         const searchResult = searchResults[0]
-                    //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id)
-                    //     })
-                    // })
-                    return testFunction(newPlaylistId, playlist_track_objs)
-                    // playlist_track_objs.map((playlist_track_obj) => {
-                    //     const track = playlist_track_obj.track
-                    //     getYouTubeVideo(formatTrackArtists(track.artists), track.name).then((searchResults) => {
-                    //         const searchResult = searchResults[0]
-                    //         insertVideoIntoPlaylist(newPlaylistId, searchResult.id).then(() => {
-                    //             console.log("finished inserting video into playlist!")
-                    //         })
-                    //     })
-                    // })
-                }).then(console.log("we done!"))
+                    return insertVideosIntoPlaylist(newPlaylistId, playlist_track_objs)
+                }).then(() => {
+                    displayMessage.textContent = 'Success!'
+                })
             }).catch((err) => {
                 console.log(`Error: ${err}`)
             })
@@ -117,19 +105,11 @@ document.getElementById('convert-button').addEventListener('click', (e) => {
     }
 })
 
-document.getElementById('test-log-playlists-button').addEventListener('click', (e) => {
-    getYouTubePlaylists().then((response) => {
-        console.log(response)
-    }).catch((err) => {
-        console.log(`Error: ${err}`)
-    })
-})
-
-const access_token = getAccessToken()
+access_token = getAccessToken()
 if (!access_token) {
-    loginMessage.textContent = 'Please log in to Spotify by pressing button below.'
+    displayMessage.textContent = 'Please log in to Spotify by pressing button below.'
 } else {
-    loginMessage.textContent = 'Currently logged in to Spotify.'
+    displayMessage.textContent = 'Currently logged in to Spotify.'
     getSpotifyPlaylists().then((playlists) => {
         renderSpotifyPlaylists(playlists)
     }).catch((err) => {
