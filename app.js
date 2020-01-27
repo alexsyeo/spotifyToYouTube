@@ -82,7 +82,7 @@ access_token = getAccessToken()
 if (access_token) {
     spotifyLogin.display = 'none'
     if (GoogleAuth.isSignedIn.get()) {
-        convertButton.display = 'block'
+        convertButton.display = 'inline-block'
         youtubeLogin = 'none'
         getSpotifyPlaylists().then((playlists) => {
             renderSpotifyPlaylists(playlists)
