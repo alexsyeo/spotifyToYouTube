@@ -80,17 +80,17 @@ convertButton.addEventListener('click', convertButtonHandler)
 
 access_token = getAccessToken()
 if (access_token) {
-    spotifyLogin.display = 'none'
+    spotifyLogin.style.display = 'none'
     if (GoogleAuth.isSignedIn.get()) {
-        convertButton.display = 'inline-block'
-        youtubeLogin = 'none'
+        convertButton.style.display = 'inline-block'
+        youtubeLogin.style.display = 'none'
         getSpotifyPlaylists().then((playlists) => {
             renderSpotifyPlaylists(playlists)
         }).catch((err) => {
             console.log(err)
         })
     } else {
-        convertButton.display = 'none'
-        youtubeLogin.display = 'block'
+        convertButton.style.display = 'none'
+        youtubeLogin.style.display = 'block'
     }
 }
