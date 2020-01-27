@@ -39,7 +39,7 @@ function initClient() {
         setSigninStatus()
 
         // Call handleAuthClick function when user clicks on
-        //      "Sign In/Authorize" button.
+        // "YouTube Login" button.
         $('#youtube-login').click(function () {
             handleAuthClick()
         })
@@ -101,7 +101,6 @@ convertButton.addEventListener('click', () => {
 access_token = getAccessToken()
 if (access_token) {
     spotifyLogin.style.display = 'none'
-    youtubeLogin.style.display = 'inline-block'
 } else {
     spotifyLogin.style.display = 'inline-block'
     youtubeLogin.style.display = 'none'
