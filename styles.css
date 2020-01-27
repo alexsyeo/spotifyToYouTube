@@ -14,10 +14,9 @@ ul {
     text-align: left;
 }
 
-/* input[type="checkbox"]
-{
-    vertical-align:middle;
-} */
+li {
+    margin: 0 0 5px 0;
+}
 
 button {
     background-color :white;
