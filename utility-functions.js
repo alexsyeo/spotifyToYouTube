@@ -4,9 +4,11 @@ const renderSpotifyPlaylists = (playlists) => {
     const playlistsEl = document.getElementById('playlists')
     playlists.forEach((playlist) => {
         const listEl = document.createElement('li')
-        listEl.textContent = playlist.name
+        // listEl.textContent = playlist.name
         const checkBox = document.createElement('input')
+        
         checkBox.setAttribute('type', 'checkbox')
+        checkBox.setAttribute('id', playlist.name)
         checkBox.addEventListener('change', (e) => {
             if (e.target.checked) {
                 if (!playlistsToProcess.hasOwnProperty(playlist.name)) {
@@ -17,8 +19,13 @@ const renderSpotifyPlaylists = (playlists) => {
             }
         })
 
+        const label = document.createElement('label')
+        label.textContent = playlist.name
+        label.setAttribute('for', playlist.name)
+
         playlistsEl.appendChild(listEl)
-        playlistsEl.appendChild(checkBox)
+        listEl.appendChild(checkBox)
+        listEl.appendChild(label)
     })
 }
 
