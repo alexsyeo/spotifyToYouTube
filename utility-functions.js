@@ -21,8 +21,9 @@ const renderSpotifyPlaylists = (playlists) => {
         
 
         const labelEl = document.createElement('label')
-        labelEl.appendChild(checkBox)
+        // labelEl.appendChild(checkBox)
         labelEl.textContent = playlist.name
+        listEl.appendChild(checkBox)
         listEl.appendChild(labelEl)
         playlistsEl.appendChild(listEl)
     })
