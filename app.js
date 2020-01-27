@@ -4,6 +4,7 @@ const SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl'
 const displayMessage = document.getElementById('display-message')
 const convertButton = document.getElementById('convert-button')
 const spotifyLogin = document.getElementById('spotify-login')
+const youtubeLogin = document.getElementById('youtube-login')
 const playlistsToProcess = {}
 let access_token
 let GoogleAuth
@@ -39,7 +40,7 @@ function initClient() {
 
         // Call handleAuthClick function when user clicks on
         //      "Sign In/Authorize" button.
-        $('#sign-in-or-out-button').click(function () {
+        $('#youtube-login').click(function () {
             handleAuthClick()
         })
     })
@@ -59,12 +60,12 @@ function setSigninStatus() {
     const user = GoogleAuth.currentUser.get();
     const isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-        $('#sign-in-or-out-button').html('Sign out')
+        $('#youtube-login').html('Sign out')
         $('#revoke-access-button').css('display', 'inline-block')
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.')
     } else {
-        $('#sign-in-or-out-button').html('Sign In/Authorize')
+        $('#youtube-login').html('Sign In/Authorize')
         $('#revoke-access-button').css('display', 'none')
         $('#auth-status').html('You have not authorized this app or you are ' +
             'signed out.')
@@ -75,34 +76,21 @@ spotifyLogin.addEventListener('click', (e) => {
     redirectToSpotifyLogin()
 })
 
-convertButton.addEventListener('click', (e) => {
-    if (noPlaylistsToProcess()) {
-        alert('No playlists have been selected!')
-    } else {
-        displayMessage.textContent = 'Processing...'
-        for (let playlistId of Object.keys(playlistsToProcess)) {
-            createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
-                const newPlaylistId = response.result.id
-                getSpotifyPlaylistTracks(playlistId).then((playlist_track_objs) => {
-                    return insertVideosIntoPlaylist(newPlaylistId, playlist_track_objs)
-                }).then(() => {
-                    displayMessage.textContent = 'Success!'
-                })
-            }).catch((err) => {
-                alert(`Error: ${err}`)
-            })
-        }
-    }
-})
+convertButton.addEventListener('click', convertButtonHandler)
 
 access_token = getAccessToken()
-if (!access_token) {
-    displayMessage.textContent = 'Please log in to Spotify by pressing button below.'
-} else {
-    displayMessage.textContent = 'Currently logged in to Spotify.'
-    getSpotifyPlaylists().then((playlists) => {
-        renderSpotifyPlaylists(playlists)
-    }).catch((err) => {
-        console.log(err)
-    })
+if (access_token) {
+    spotifyLogin.display = 'none'
+    if (GoogleAuth.isSignedIn.get()) {
+        convertButton.display = 'block'
+        youtubeLogin = 'none'
+        getSpotifyPlaylists().then((playlists) => {
+            renderSpotifyPlaylists(playlists)
+        }).catch((err) => {
+            console.log(err)
+        })
+    } else {
+        convertButton.display = 'none'
+        youtubeLogin.display = 'block'
+    }
 }

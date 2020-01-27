@@ -1,0 +1,32 @@
+body {
+    background-color: tomato;
+    text-align: center;
+    color: white;
+    font-family: 'Alfa Slab One', cursive;
+}
+
+h1 {
+    font-family: 'Alfa Slab One', cursive;
+}
+
+/* p {
+    color: black;
+} */
+
+button {
+    background-color :white;
+    border: 1px solid red;
+    width: 200px;
+    height: 70px;
+    font-size: 20px;
+    font-family: inherit;
+    color: tomato;
+}
+
+#convert-button {
+    display: none;
+}
+
+#youtube-login {
+    display: none;
+}
