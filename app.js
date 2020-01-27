@@ -69,10 +69,8 @@ function setSigninStatus() {
                 console.log(err)
             })
         }
-        // $('#youtube-login').html('Sign out')
     } else {
         youtubeLogin.style.display = 'inline-block'
-        // $('#youtube-login').html('YouTube Login')
     }
 }
 
@@ -104,16 +102,6 @@ access_token = getAccessToken()
 if (access_token) {
     spotifyLogin.style.display = 'none'
     youtubeLogin.style.display = 'inline-block'
-    // if (GoogleAuth.isSignedIn.get()) {
-    //     convertButton.style.display = 'block'
-    //     getSpotifyPlaylists().then((playlists) => {
-    //         renderSpotifyPlaylists(playlists)
-    //     }).catch((err) => {
-    //         console.log(err)
-    //     })
-    // } else {
-    //     convertButton.style.display = 'none'
-    // }
 } else {
     spotifyLogin.style.display = 'inline-block'
     youtubeLogin.style.display = 'none'

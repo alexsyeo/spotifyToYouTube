@@ -18,6 +18,13 @@ li {
     margin: 0 0 5px 0;
 }
 
+label input[type=checkbox]{
+    position: relative;
+    vertical-align: middle;
+    bottom: 2px;
+    margin-right: 10px;
+}
+
 button {
     background-color :white;
     border: 1px solid red;
