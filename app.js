@@ -28,7 +28,7 @@ function initClient() {
         'discoveryDocs': [discoveryUrl],
         'clientId': CLIENT_ID,
         'scope': SCOPE
-    }).then(function () {
+    }).then(() => {
         GoogleAuth = gapi.auth2.getAuthInstance()
 
         // Listen for sign-in state changes.
@@ -60,9 +60,14 @@ function setSigninStatus() {
     const user = GoogleAuth.currentUser.get();
     const isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-        $('#youtube-login').html('Sign out')
+        youtubeLogin.style.display = 'none'
+        if (access_token) {
+            convertButton.style.display = 'inline-block'
+        }
+        // $('#youtube-login').html('Sign out')
     } else {
-        $('#youtube-login').html('YouTube Login')
+        youtubeLogin.style.display = 'inline-block'
+        // $('#youtube-login').html('YouTube Login')
     }
 }
 
@@ -93,16 +98,18 @@ convertButton.addEventListener('click', () => {
 access_token = getAccessToken()
 if (access_token) {
     spotifyLogin.style.display = 'none'
-    if (GoogleAuth.isSignedIn.get()) {
-        convertButton.style.display = 'inline-block'
-        youtubeLogin.style.display = 'none'
-        getSpotifyPlaylists().then((playlists) => {
-            renderSpotifyPlaylists(playlists)
-        }).catch((err) => {
-            console.log(err)
-        })
-    } else {
-        convertButton.style.display = 'none'
-        youtubeLogin.style.display = 'block'
-    }
+    youtubeLogin.style.display = 'inline-block'
+    // if (GoogleAuth.isSignedIn.get()) {
+    //     convertButton.style.display = 'block'
+    //     getSpotifyPlaylists().then((playlists) => {
+    //         renderSpotifyPlaylists(playlists)
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     })
+    // } else {
+    //     convertButton.style.display = 'none'
+    // }
+} else {
+    spotifyLogin.style.display = 'inline-block'
+    youtubeLogin.style.display = 'none'
 }
