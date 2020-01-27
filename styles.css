@@ -12,6 +12,7 @@ h1 {
 ul {
     list-style-type: none;
     text-align: left;
+    margin-left: 200px;
 }
 
 li {

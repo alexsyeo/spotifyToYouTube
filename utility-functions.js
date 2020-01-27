@@ -16,15 +16,14 @@ const renderSpotifyPlaylists = (playlists) => {
             }
         })
 
-        listEl.appendChild(checkBox)
-        listEl.textContent = playlist.name
+        // listEl.appendChild(checkBox)
+        // listEl.textContent = playlist.name
         
 
-        // const labelEl = document.createElement('label')
-        // labelEl.appendChild(checkBox)
-        // labelEl.textContent = playlist.name
-
-        // listEl.appendChild(labelEl)
+        const labelEl = document.createElement('label')
+        labelEl.appendChild(checkBox)
+        labelEl.textContent = playlist.name
+        listEl.appendChild(labelEl)
         playlistsEl.appendChild(listEl)
     })
 }
