@@ -16,8 +16,9 @@ const renderSpotifyPlaylists = (playlists) => {
             }
         })
 
-        listEl.textContent = playlist.name
         listEl.appendChild(checkBox)
+        listEl.textContent = playlist.name
+        
 
         // const labelEl = document.createElement('label')
         // labelEl.appendChild(checkBox)
