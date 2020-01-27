@@ -18,7 +18,14 @@ li {
     margin: 0 0 5px 0;
 }
 
-label input[type=checkbox]{
+/* label input[type=checkbox]{
+    position: relative;
+    vertical-align: middle;
+    bottom: 2px;
+    margin-right: 10px;
+} */
+
+input[type=checkbox]{
     position: relative;
     vertical-align: middle;
     bottom: 2px;
