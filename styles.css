@@ -9,9 +9,10 @@ h1 {
     font-family: 'Alfa Slab One', cursive;
 }
 
-/* p {
-    color: black;
-} */
+ul {
+    list-style-type: none;
+    text-align: left;
+}
 
 button {
     background-color :white;
