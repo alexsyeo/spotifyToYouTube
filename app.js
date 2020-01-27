@@ -63,6 +63,11 @@ function setSigninStatus() {
         youtubeLogin.style.display = 'none'
         if (access_token) {
             convertButton.style.display = 'inline-block'
+            getSpotifyPlaylists().then((playlists) => {
+                renderSpotifyPlaylists(playlists)
+            }).catch((err) => {
+                console.log(err)
+            })
         }
         // $('#youtube-login').html('Sign out')
     } else {
