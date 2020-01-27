@@ -70,7 +70,25 @@ spotifyLogin.addEventListener('click', (e) => {
     redirectToSpotifyLogin()
 })
 
-convertButton.addEventListener('click', convertButtonHandler)
+convertButton.addEventListener('click', () => {
+    if (noPlaylistsToProcess()) {
+        alert('No playlists have been selected!')
+    } else {
+        displayMessage.textContent = 'Processing...'
+        for (let playlistId of Object.keys(playlistsToProcess)) {
+            createNewPlaylist(playlistsToProcess[playlistId]).then((response) => {
+                const newPlaylistId = response.result.id
+                getSpotifyPlaylistTracks(playlistId).then((playlist_track_objs) => {
+                    return insertVideosIntoPlaylist(newPlaylistId, playlist_track_objs)
+                }).then(() => {
+                    displayMessage.textContent = 'Success!'
+                })
+            }).catch((err) => {
+                alert(`Error: ${err}`)
+            })
+        }
+    }
+})
 
 access_token = getAccessToken()
 if (access_token) {
