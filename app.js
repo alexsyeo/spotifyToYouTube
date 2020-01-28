@@ -64,7 +64,7 @@ function setSigninStatus() {
         youtubeLogin.style.display = 'none'
         if (access_token) {
             convertButton.style.display = 'inline-block'
-            playlistsMessage.style.display = 'inline-block'
+            playlistsMessage.style.display = 'block'
             getSpotifyPlaylists().then((playlists) => {
                 renderSpotifyPlaylists(playlists)
             }).catch((err) => {
