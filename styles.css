@@ -11,9 +11,12 @@ h1 {
 }
 
 #playlists-div {
-    list-style-type: none;
     text-align: left;
     margin-left: 200px;
+}
+
+ul {
+    list-style-type: none;
 }
 
 li {
