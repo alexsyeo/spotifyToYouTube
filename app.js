@@ -72,8 +72,9 @@ function setSigninStatus() {
             })
         }
     } else {
-        youtubeLogin.style.display = 'inline-block'
-        playlistsMessage.style.display = 'none'
+        if (access_token) {
+            youtubeLogin.style.display = 'inline-block'
+        }
     }
 }
 
