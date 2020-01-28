@@ -15,7 +15,11 @@ h1 {
     margin-left: 200px;
 }
 
-ul {
+#playlists-div > p {
+    margin-left: 50px;
+}
+
+#playlists-div > ul {
     list-style-type: none;
 }
 
