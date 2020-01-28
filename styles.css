@@ -44,3 +44,7 @@ button {
 #youtube-login {
     display: none;
 }
+
+#playlists-message {
+    display: none;
+}

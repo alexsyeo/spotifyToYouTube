@@ -5,6 +5,7 @@ const displayMessage = document.getElementById('display-message')
 const convertButton = document.getElementById('convert-button')
 const spotifyLogin = document.getElementById('spotify-login')
 const youtubeLogin = document.getElementById('youtube-login')
+const playlistsMessage = document.getElementById('playlists-message')
 const playlistsToProcess = {}
 let access_token
 let GoogleAuth
@@ -63,6 +64,7 @@ function setSigninStatus() {
         youtubeLogin.style.display = 'none'
         if (access_token) {
             convertButton.style.display = 'inline-block'
+            playlistsMessage.style.display = 'inline-block'
             getSpotifyPlaylists().then((playlists) => {
                 renderSpotifyPlaylists(playlists)
             }).catch((err) => {
@@ -71,6 +73,7 @@ function setSigninStatus() {
         }
     } else {
         youtubeLogin.style.display = 'inline-block'
+        playlistsMessage.style.display = 'none'
     }
 }
 
@@ -104,4 +107,5 @@ if (access_token) {
 } else {
     spotifyLogin.style.display = 'inline-block'
     youtubeLogin.style.display = 'none'
+    playlistsMessage.style.display = 'none'
 }
