@@ -1,6 +1,6 @@
 const SPOTIFY_LOGIN_URL = 'https://accounts.spotify.com/authorize'
 const SPOTIFY_CLIENT_ID = '15eec43e1d384f5eaf6a811a8d0c3e06'
-const REDIRECT_URI = 'https://spotifytoyoutube.com'
+const REDIRECT_URI = 'https://alexsyeo.github.io/spotifyToYouTube'
 const RESPONSE_TYPE = 'token'
 const SPOTIFY_SCOPE = 'playlist-read-private'
 
