@@ -1,5 +1,5 @@
 body {
-    background-color: tomato;
+    background-color: #ef5778;
     text-align: center;
     color: white;
     font-family: 'Alfa Slab One', cursive;
@@ -41,7 +41,7 @@ button {
     height: 70px;
     font-size: 20px;
     font-family: inherit;
-    color: tomato;
+    color: #ef5778;
 }
 
 #convert-button {
